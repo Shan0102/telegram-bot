@@ -92,6 +92,9 @@ const sendRandomPassword = async (chatId: number, text: string | undefined) => {
     if (!text || isNaN(parseInt(text))) {
         return await bot.sendMessage(chatId, `I was waiting a number`);
     }
+    if (parseInt(text) < 4 || parseInt(text) > 100) {
+        return await bot.sendMessage(chatId, `Number should be between 4 and 100`);
+    }
 
     const randomPassword = createPassword(parseInt(text));
     await bot.sendMessage(chatId, randomPassword);
