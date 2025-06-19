@@ -1,0 +1,22 @@
+{
+    "name": "1st_test_bot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "commonjs",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "dev": "nodemon dist/index.js",
+        "start": "node dist/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@types/node-telegram-bot-api": "^0.64.9",
+        "dotenv": "^16.5.0",
+        "node-telegram-bot-api": "^0.66.0",
+        "nodemon": "^3.1.10"
+    }
+}
