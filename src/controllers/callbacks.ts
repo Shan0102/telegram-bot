@@ -4,7 +4,8 @@ import { getBot } from "../services/botService";
 
 import * as handleCommands from "./commands";
 
-const guess = async (
+// handle user guess
+const sendIsGuessRight = async (
     chatId: number | undefined,
     data: string,
     messageId: number,
@@ -38,11 +39,12 @@ const guess = async (
     await bot.sendMessage(chatId, text, guessOptions);
 };
 
-const newGame = async (chatId: number | undefined, queryId: string) => {
+// handle new game request
+const sendNewGame = async (chatId: number | undefined, queryId: string) => {
     const bot = getBot();
     await bot.answerCallbackQuery(queryId);
 
-    if (chatId) await handleCommands.startGame(chatId);
+    if (chatId) await handleCommands.sendGameStart(chatId);
 };
 
-export { guess, newGame };
+export { sendIsGuessRight, sendNewGame };

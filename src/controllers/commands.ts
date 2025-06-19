@@ -4,7 +4,8 @@ import storage from "../data/storage";
 import { getBot } from "../services/botService";
 import { createPassword } from "../functions/randomPassword";
 
-const welcome = async (chatId: number) => {
+// send welcome message
+const sendWelcome = async (chatId: number) => {
     const bot = getBot();
 
     await bot.sendSticker(
@@ -14,7 +15,8 @@ const welcome = async (chatId: number) => {
     await bot.sendMessage(chatId, "Welcome to my tg BOT");
 };
 
-const defaultAnswer = async (chatId: number) => {
+// send default answer if command is not recognized
+const sendDefaultAnswer = async (chatId: number) => {
     const bot = getBot();
     await bot.sendSticker(
         chatId,
@@ -23,7 +25,8 @@ const defaultAnswer = async (chatId: number) => {
     await bot.sendMessage(chatId, `I don't understand`);
 };
 
-const startGame = async (chatId: number) => {
+// send game start message with inline keyboard
+const sendGameStart = async (chatId: number) => {
     const bot = getBot();
     const gameOptions: TgAPI.SendMessageOptions = {
         reply_markup: {
@@ -55,13 +58,15 @@ const startGame = async (chatId: number) => {
     storage.random_nums[chatId][msg.message_id] = randomNum;
 };
 
-const prepareForStickers = async (chatId: number) => {
+// prepare for user to send stickers
+const sendPrepareForStickers = async (chatId: number) => {
     const bot = getBot();
     storage.awaiting[chatId] = "awaiting_sticker";
     await bot.sendMessage(chatId, "Send a sticker you want to get a set from");
 };
 
-const getAllStickersId = async (chatId: number, sticker: TgAPI.Sticker | undefined) => {
+// send all stickers' id from the set
+const sendAllStickersId = async (chatId: number, sticker: TgAPI.Sticker | undefined) => {
     const bot = getBot();
     if (!sticker) return await bot.sendMessage(chatId, `I was waiting for sticker`);
     if (!sticker.set_name) return await bot.sendMessage(chatId, `This sticker has no set name`);
@@ -74,12 +79,14 @@ const getAllStickersId = async (chatId: number, sticker: TgAPI.Sticker | undefin
     bot.sendMessage(chatId, msg);
 };
 
-const prepareForNumber = async (chatId: number) => {
+// prepare for user to send a number for password generation
+const sendPrepareForNumber = async (chatId: number) => {
     const bot = getBot();
     storage.awaiting[chatId] = "awaiting_number";
     await bot.sendMessage(chatId, "Send a number you want your password's length");
 };
 
+// send a random password based on user's input number
 const sendRandomPassword = async (chatId: number, text: string | undefined) => {
     const bot = getBot();
     if (!text || isNaN(parseInt(text))) {
@@ -91,11 +98,11 @@ const sendRandomPassword = async (chatId: number, text: string | undefined) => {
 };
 
 export {
-    defaultAnswer,
-    welcome,
-    startGame,
-    prepareForStickers,
-    getAllStickersId,
-    prepareForNumber,
+    sendWelcome,
+    sendDefaultAnswer,
+    sendGameStart,
+    sendPrepareForStickers,
+    sendAllStickersId,
+    sendPrepareForNumber,
     sendRandomPassword,
 };
