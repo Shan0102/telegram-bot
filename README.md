@@ -6,6 +6,7 @@ A simple Telegram bot built with Node.js, TypeScript, and [node-telegram-bot-api
 
 -   Responds to commands and callbacks
 -   Generates random passwords
+-   Send all stickers' id from one
 -   Modular code structure for easy maintenance
 
 ## Project Structure
