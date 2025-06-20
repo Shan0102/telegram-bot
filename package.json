@@ -1,5 +1,5 @@
 {
-    "name": "1st_test_bot",
+    "name": "test_telegram_bot",
     "version": "1.0.0",
     "main": "dist/index.js",
     "type": "commonjs",
