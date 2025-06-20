@@ -1,13 +1,7 @@
+import crypto from "crypto";
+
 function getRandomInt(max: number): number {
-    const randomBuffer = new Uint32Array(1);
-    let randomValue;
-
-    do {
-        crypto.getRandomValues(randomBuffer);
-        randomValue = randomBuffer[0];
-    } while (randomValue >= 2 ** 32 - (2 ** 32 % max));
-
-    return randomValue % max;
+    return crypto.randomInt(0, max);
 }
 
 function getRandomFromString(str: string): string {
